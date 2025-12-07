@@ -28,7 +28,7 @@ Create a file named .env in the project root:
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-5️⃣###  Build the Knowledge Base (RAG DB)
+### 5️⃣ Build the Knowledge Base (RAG DB)
 
 This creates the vector database from knowledge_base.md.
 ```sh
