@@ -1,4 +1,7 @@
-streamlit
+groq
 chromadb
-sentence-transformers
-torch
+onnxruntime
+pydub
+streamlit
+numpy
+soundfile
