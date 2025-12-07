@@ -4,40 +4,22 @@ import streamlit as st
 # Load API key from Streamlit Secrets
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
-# client = Groq(api_key=GROQ_API_KEY)
-
-MODEL_NAME = "llama-3.3-70b-versatile"
-
-
-def generate_answer(user_query, docs):
-    """
-    Generate an answer using Groq LLM based on retrieved KB docs.
-    """
-
-    # Join retrieved docs
+def generate_answer(query, docs):
     context = "\n\n".join(docs)
 
     prompt = f"""
-You are an assistant for a credit card company (OneCard).
-Answer ONLY using the information in the provided context.
-
-User Question: {user_query}
+You are a helpful credit card assistant.
+Use ONLY the context below to answer.
 
 Context:
 {context}
 
-If the answer is not covered by context, say:
-"I’m sorry, I don’t have that information in my knowledge base."
+User question: {query}
 """
 
     response = client.chat.completions.create(
-        model=MODEL_NAME,
-        messages=[
-            {"role": "system", "content": "Answer clearly and concisely."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.2,
+        model="llama-3.1-8b-instant",
+        messages=[{"role": "user", "content": prompt}]
     )
 
-    # FIX: Groq uses attributes, not dictionary indexing
-    return response.choices[0].message.content
+    return response.choices[0].message["content"]
