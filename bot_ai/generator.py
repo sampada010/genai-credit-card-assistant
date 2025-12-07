@@ -1,8 +1,8 @@
-import os
 from groq import Groq
+import streamlit as st
 
-# Use your actual API key
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+# Load API key from Streamlit Secrets
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 # client = Groq(api_key=GROQ_API_KEY)
 
